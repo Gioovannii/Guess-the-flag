@@ -41,6 +41,9 @@ struct ContentView: View {
                             .shadow(color: .black, radius: 2)
                     }
                 }
+                Label("Score", systemImage: "\(userScore).circle")
+                    .foregroundColor(.white)
+                    .font(.largeTitle)
                 Spacer()
             }
         }
@@ -56,8 +59,11 @@ struct ContentView: View {
             scoreTitle = "Correct"
             userScore += 1
         } else {
-            scoreTitle = "Wrong"
+            scoreTitle = "Wrong that's the flag of \(countries[number])"
+            if userScore <= 0 { userScore = 0
+            } else {
             userScore -= 1
+            }
         }
         showingScore = true
     }
