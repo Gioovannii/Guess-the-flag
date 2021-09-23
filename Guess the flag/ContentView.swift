@@ -13,6 +13,7 @@ struct ContentView: View {
     
     @State private var showingScore = false
     @State private var scoreTitle = ""
+    @State private var userScore = 0
     
     var body: some View {
         
