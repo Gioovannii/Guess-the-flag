@@ -63,7 +63,7 @@ struct ContentView: View {
     }
     
     func askQuestion() {
-        countries.shuffled()
+        countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
     }
 }
