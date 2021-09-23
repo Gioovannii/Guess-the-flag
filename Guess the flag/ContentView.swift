@@ -23,7 +23,7 @@ struct ContentView: View {
             
             VStack(spacing: 30) {
                 VStack {
-                    Text("Tap the flag of")
+                    Text("Tap the flag of \(countries[correctAnswer])")
                     Text(countries[correctAnswer])
                         .font(.largeTitle)
                         .fontWeight(.black)
