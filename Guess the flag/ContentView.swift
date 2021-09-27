@@ -23,7 +23,7 @@ struct ContentView: View {
             
             VStack(spacing: 30) {
                 VStack {
-                    Text("Tap the flag of \(countries[correctAnswer])")
+                    Text("Tap the flag of")
                     Text(countries[correctAnswer])
                         .font(.largeTitle)
                         .fontWeight(.black)
@@ -34,16 +34,16 @@ struct ContentView: View {
                     Button(action: {
                         self.flagTapped(number)
                     }) {
-                        Image(self.countries[number])
-                            .renderingMode(.original)
-                            .clipShape(Capsule())
-                            .overlay(Capsule().stroke(Color.black, lineWidth: 1))
-                            .shadow(color: .black, radius: 2)
+                        Color.white.flagStyle(of: countries[number])
                     }
                 }
-                Label("Score", systemImage: "\(userScore).circle")
-                    .foregroundColor(.white)
-                    .font(.largeTitle)
+                
+                HStack {
+                    Text("Score")
+                    Image(systemName: "\(userScore).circle")
+                }
+                .foregroundColor(.white)
+                .font(.largeTitle)
                 Spacer()
             }
         }
