@@ -41,8 +41,11 @@ struct ContentView: View {
                     }) {
                         Color.white.flagStyle(of: countries[number])
                             .rotation3DEffect(.degrees(number == correctAnswer ? rotationAmount : 0), axis: (x: 0, y: 1, z: 0))
-                            .rotation3DEffect(.degrees(self.wrongRotationAmount[number]),
-                                              axis: (x: 0, y: 1, z: 0))
+                        
+                            .rotation3DEffect(.degrees(self.wrongRotationAmount[number]),axis: (x: 1, y: 02, z: 7))
+                        
+                            .opacity(number == correctAnswer ? 1 : opacityAmount)
+                        
                     }
                 }
                 
