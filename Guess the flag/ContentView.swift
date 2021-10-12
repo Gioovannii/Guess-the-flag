@@ -80,13 +80,16 @@ struct ContentView: View {
             }
         }
         
-        if userScore < 0 { userScore = 0}
+        if userScore < 0 { userScore = 0 }
         showingScore = true
     }
     
     func askQuestion() {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+        
+        self.rotationAmount = 0.0
+        wrongRotationAmount = Array(repeating: 0.0, count: 3)
     }
 }
 
