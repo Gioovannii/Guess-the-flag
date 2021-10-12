@@ -39,6 +39,9 @@ struct ContentView: View {
                         self.flagTapped(number)
                     }) {
                         Color.white.flagStyle(of: countries[number])
+                            .rotation3DEffect(.degrees(number == correctAnswer ? rotationAmount : 0), axis: (x: 0, y: 1, z: 0))
+                            .rotation3DEffect(.degrees(self.wrongRotationAmount[number]),
+                                              axis: (x: 0, y: 1, z: 0))
                     }
                 }
                 
