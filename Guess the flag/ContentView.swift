@@ -76,11 +76,12 @@ struct ContentView: View {
             }
         } else {
             scoreTitle = "Wrong"
-            guard userScore > 0 else { return }
-            userScore -= 1
-            
             withAnimation(Animation.interpolatingSpring(mass: 1, stiffness: 120, damping: 40, initialVelocity: 200)) {
-                self.wrongRotationAmount[number] = 1
+                self.wrongRotationAmount[number] = 30
+            }
+            if userScore > 1 {
+                userScore -= 1
+            } else { userScore = 0
             }
         }
         
@@ -92,6 +93,9 @@ struct ContentView: View {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
         
+        withAnimation(.easeInOut) {
+            self.opacityAmount = 1.0
+        }
         self.rotationAmount = 0.0
         wrongRotationAmount = Array(repeating: 0.0, count: 3)
     }
