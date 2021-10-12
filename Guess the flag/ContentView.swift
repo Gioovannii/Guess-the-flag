@@ -16,6 +16,7 @@ struct ContentView: View {
     @State private var userScore = 0
     
     @State private var rotationAmount = 0.0
+    @State private var opacityAmount = 1.0
     @State private var wrongRotationAmount = [0.0, 0.0, 0.0]
     
     var body: some View {
