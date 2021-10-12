@@ -62,8 +62,23 @@ struct ContentView: View {
     }
     
     func flagTapped(_ number: Int) {
-        scoreTitle = number == correctAnswer ?  "Correct" :  "Wrong"
-        userScore = number == correctAnswer ? userScore + 1 : userScore - 1
+        if number == correctAnswer {
+            scoreTitle = "Correct"
+            userScore += 1
+            rotationAmount = 0.0
+            
+            withAnimation(.interpolatingSpring(stiffness: 20, damping: 5)) {
+                self.rotationAmount = 360
+            }
+        } else {
+            scoreTitle = "Wrong"
+            guard userScore > 0 else { return }
+            userScore -= 1
+            
+            withAnimation(Animation.interpolatingSpring(mass: 1, stiffness: 120, damping: 40, initialVelocity: 200)) {
+                self.wrongRotationAmount[number] = 1
+            }
+        }
         
         if userScore < 0 { userScore = 0}
         showingScore = true
