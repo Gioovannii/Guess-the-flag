@@ -20,10 +20,9 @@ struct ContentView: View {
     @State private var wrongRotationAmount = [0.0, 0.0, 0.0]
     
     var body: some View {
-        
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.blue, .black]),
-                           startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [.blue, .mint, .indigo]),
+                           startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 30) {
