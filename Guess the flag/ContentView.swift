@@ -37,6 +37,7 @@ struct ContentView: View {
                 ForEach(0 ..< 3) { number in
                     Button(action: {
                         self.flagTapped(number)
+                        self.opacityAmount = 0.4
                     }) {
                         Color.white.flagStyle(of: countries[number])
                             .rotation3DEffect(.degrees(number == correctAnswer ? rotationAmount : 0), axis: (x: 0, y: 1, z: 0))
