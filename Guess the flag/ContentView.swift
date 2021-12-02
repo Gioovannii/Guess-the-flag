@@ -59,6 +59,7 @@ struct ContentView: View {
                             .rotation3DEffect(.degrees(self.wrongRotationAmount[number]),axis: (x: 1, y: 02, z: 7))
                         
                             .opacity(number == correctAnswer ? 1 : opacityAmount)
+                            .accessibilityLabel(Text(self.labels[self.countries[number]], default: "Unknown flag"))
                         
                     }
                 }
