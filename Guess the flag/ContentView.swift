@@ -35,34 +35,54 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.blue, .mint, .indigo]),
-                           startPoint: .topLeading, endPoint: .bottomTrailing)
-                .edgesIgnoringSafeArea(.all)
+            RadialGradient(stops: [
+                .init(color: Color(red: 0.1, green: 0.2, blue: 0.45), location: 0.3),
+                .init(color: Color(red: 0.76, green: 0.15, blue: 0.26), location: 0.3)], center: .top, startRadius: 200, endRadius: 700)
+                .ignoresSafeArea()
             
-            VStack(spacing: 30) {
-                VStack {
-                    Text("Tap the flag of")
-                    Text(countries[correctAnswer])
-                        .font(.largeTitle)
-                        .fontWeight(.black)
-                }
-                .foregroundColor(.white)
+            //            LinearGradient(gradient: Gradient(colors: [.blue, .black]),
+            //                           startPoint: .top, endPoint: .bottom)
+            
+            VStack {
+                Spacer()
+                Text("Guess the Flag")
+                    .font(.largeTitle.bold())
+                    .foregroundColor(.white)
                 
-                ForEach(0 ..< 3) { number in
-                    Button(action: {
-                        self.flagTapped(number)
-                        self.opacityAmount = 0.4
-                    }) {
-                        Color.white.flagStyle(of: countries[number])
-                            .rotation3DEffect(.degrees(number == correctAnswer ? rotationAmount : 0), axis: (x: 0, y: 1, z: 0))
-                        
-                            .rotation3DEffect(.degrees(self.wrongRotationAmount[number]),axis: (x: 1, y: 02, z: 7))
-                        
-                            .opacity(number == correctAnswer ? 1 : opacityAmount)
-                            .accessibilityLabel(Text(self.labels[self.countries[number]], default: "Unknown flag"))
-                        
+                VStack(spacing: 15) {
+                    VStack {
+                        Text("Tap the flag of")
+                            .foregroundStyle(.secondary)
+                            .font(.subheadline.weight(.heavy))
+                        Text(countries[correctAnswer])
+                            .font(.largeTitle)
+                            .fontWeight(.black)
                     }
+                    
+                    ForEach(0 ..< 3) { number in
+                        Button {
+                            self.flagTapped(number)
+                            self.opacityAmount = 0.4
+                        } label: {
+                            Color.white.flagStyle(of: countries[number])
+                                .rotation3DEffect(.degrees(number == correctAnswer ? rotationAmount : 0), axis: (x: 0, y: 1, z: 0))
+                            
+                                .rotation3DEffect(.degrees(self.wrongRotationAmount[number]),axis: (x: 1, y: 0, z: 7))
+                            
+                                .opacity(number == correctAnswer ? 1 : opacityAmount)
+                                .accessibilityLabel(labels[countries[number], default: "Unknown flag"])
+                            
+                        }
+                    }
+                    
                 }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 20)
+                .background(.thinMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                
+                Spacer()
+                Spacer()
                 
                 HStack {
                     Text("Score")
@@ -70,8 +90,10 @@ struct ContentView: View {
                 }
                 .foregroundColor(.white)
                 .font(.largeTitle)
+                
                 Spacer()
             }
+            .padding()
         }
         .alert(isPresented: $showingScore) {
             Alert(title: Text(scoreTitle), message: Text("Your score is \(userScore)"), dismissButton: .default(Text("Continue")) {
